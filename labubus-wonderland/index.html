@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+<<<<<<< HEAD
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labubu's Wardrobe Wonderland</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p>Loading Assets...</p>
+    </div>
+
+    <div id="game-container">
+        <header>
+            <h1>Labubu's Wardrobe Wonderland</h1>
+        </header>
+
+        <main id="main-content">
+            <aside id="parts-palette">
+                <h2>Wardrobe</h2>
+                <div id="palette-content">
+                    </div>
+            </aside>
+
+            <div id="canvas-container">
+                <canvas id="labubu-canvas"></canvas>
+            </div>
+
+            <aside id="controls-panel">
+                <h2>Customize</h2>
+                <div class="control-group">
+                    <label for="color-picker">Part Color:</label>
+                    <input type="color" id="color-picker" value="#ffffff" disabled>
+                </div>
+                <div class="control-group layer-controls">
+                    <button id="bring-forward-btn" disabled>Bring Forward</button>
+                    <button id="send-backward-btn" disabled>Send Backward</button>
+                </div>
+                 <div class="control-group">
+                    <label for="scale-slider">Scale:</label>
+                    <input type="range" id="scale-slider" min="0.5" max="1.5" value="1" step="0.05" disabled>
+                </div>
+            </aside>
+        </main>
+
+        <footer>
+            <button id="randomize-btn">Randomize ✨</button>
+            <button id="reset-btn">Reset</button>
+            <button id="export-btn">Export PNG</button>
+        </footer>
+=======
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Labubu's Creative Canvas</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Labubu's Creative Canvas</h1>
+
+    <div id="app-container">
+        <div id="canvas-area">
+            <canvas id="labubuCanvas"></canvas>
+            <div id="drawing-surface-overlay">Drag parts here</div>
+        </div>
+
+        <div id="controls-panel">
+            <h2>Parts Palette</h2>
+            <div id="parts-palette">
+                </div>
+
+            <h2>Colors</h2>
+            <div id="color-controls">
+                <label for="bodyColor">Body Color:</label>
+                <input type="color" id="bodyColor" value="#9C27B0"> <label for="eyeColor">Eye Color:</label>
+                <input type="color" id="eyeColor" value="#000000">
+
+                </div>
+
+            <h2>Actions</h2>
+            <div id="action-buttons">
+                <button id="clearCanvas">Clear Canvas</button>
+                <button id="exportImage">Export Image</button>
+            </div>
+        </div>
+>>>>>>> d7cebbf1746b44fd748cb480ec586c397776ffae
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

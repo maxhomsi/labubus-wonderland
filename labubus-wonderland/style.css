@@ -1,0 +1,442 @@
+<<<<<<< HEAD
+:root {
+    --primary-bg: #f0f4f8;
+    --secondary-bg: #ffffff;
+    --text-color: #333;
+    --header-bg: #6a5acd;
+    --button-bg: #4caf50;
+    --button-hover-bg: #45a049;
+    --border-color: #ddd;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background-color: var(--primary-bg);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+#game-container {
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    max-width: 1400px;
+}
+
+header {
+    background-color: var(--header-bg);
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    flex-shrink: 0;
+}
+
+#main-content {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+/* Palette & Controls Panels */
+#parts-palette, #controls-panel {
+    width: 240px;
+    background-color: var(--secondary-bg);
+    border-right: 1px solid var(--border-color);
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+#controls-panel {
+    border-right: none;
+    border-left: 1px solid var(--border-color);
+}
+
+#parts-palette h2, #controls-panel h2 {
+    padding: 1rem;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #f7f7f7;
+    flex-shrink: 0;
+}
+
+#palette-content {
+    overflow-y: auto;
+    padding: 1rem;
+    flex-grow: 1;
+}
+
+.palette-category {
+    margin-bottom: 1rem;
+}
+
+.palette-category h3 {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: var(--header-bg);
+}
+
+.palette-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 10px;
+}
+
+.palette-item {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    cursor: grab;
+    transition: transform 0.2s, box-shadow 0.2s;
+    background-color: #f9f9f9;
+    padding: 5px;
+}
+
+.palette-item:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.palette-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    pointer-events: none; /* Important for drag-and-drop */
+}
+
+/* Canvas Area */
+#canvas-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+
+#labubu-canvas {
+    max-width: 100%;
+    max-height: 100%;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    background-color: #fff;
+    border-radius: 10px;
+    cursor: default;
+}
+
+.selected-outline {
+    outline: 2px dashed var(--header-bg);
+    outline-offset: 4px;
+}
+
+/* Controls Panel */
+.control-group {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.control-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.control-group input[type="color"],
+.control-group input[type="range"] {
+    width: 100%;
+}
+
+.layer-controls button {
+    width: calc(50% - 5px);
+    margin-top: 0.5rem;
+}
+
+.layer-controls button:first-child {
+    margin-right: 10px;
+}
+
+/* Footer Buttons */
+footer {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    padding: 1rem;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--secondary-bg);
+    flex-shrink: 0;
+}
+
+button {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    background-color: var(--button-bg);
+    color: white;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+button:hover {
+    background-color: var(--button-hover-bg);
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+/* Loading Overlay */
+#loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.spinner {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid var(--header-bg);
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    #main-content {
+        flex-direction: column-reverse;
+    }
+
+    #parts-palette, #controls-panel {
+        width: 100%;
+        height: 200px; /* Fixed height for horizontal scrolling */
+        border: none;
+        border-top: 1px solid var(--border-color);
+        flex-direction: column;
+    }
+
+    #palette-content {
+        display: flex;
+        overflow-x: auto;
+        overflow-y: hidden;
+        padding: 0.5rem;
+    }
+
+    .palette-category {
+        margin-right: 1rem;
+        flex-shrink: 0;
+    }
+
+    .palette-items {
+        display: flex;
+        gap: 10px;
+    }
+     .palette-item {
+        width: 70px;
+        height: 70px;
+    }
+    
+    #controls-panel {
+        height: auto;
+        border-bottom: 1px solid var(--border-color);
+    }
+
+    header h1 {
+        font-size: 1.2rem;
+    }
+
+    footer {
+        flex-wrap: wrap;
+    }
+    button {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+=======
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh; /* Ensure it takes full viewport height */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+h1 {
+    color: #9C27B0; /* Labubu purple */
+    margin: 20px 0;
+    text-align: center;
+}
+
+#app-container {
+    display: flex;
+    flex-wrap: wrap; /* Allows panels to wrap on smaller screens */
+    gap: 20px;
+    width: 95%; /* Responsive width */
+    max-width: 1200px; /* Max width for larger screens */
+    margin-bottom: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box; /* Include padding in width calculation */
+}
+
+#canvas-area {
+    flex: 2; /* Takes more space */
+    min-width: 300px; /* Minimum width for canvas area */
+    background-color: #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+    position: relative; /* For overlay positioning */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px dashed #ccc;
+}
+
+#labubuCanvas {
+    background-color: #fff; /* White canvas background */
+    border-radius: 5px;
+    display: block; /* Remove extra space below canvas */
+}
+
+#drawing-surface-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #888;
+    font-size: 1.2em;
+    pointer-events: none; /* Allows clicks to pass through to canvas */
+    transition: opacity 0.3s ease;
+}
+
+#controls-panel {
+    flex: 1; /* Takes less space */
+    min-width: 280px; /* Minimum width for controls */
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 15px;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+    color: #6A1B9A; /* Darker Labubu purple */
+    margin-top: 10px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+#parts-palette {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Responsive grid */
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 5px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.palette-item {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: grab;
+    transition: transform 0.1s ease-out, box-shadow 0.2s ease;
+    text-align: center;
+}
+
+.palette-item:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.palette-item img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+#color-controls label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#color-controls input[type="color"] {
+    width: 100%;
+    height: 40px;
+    border: none;
+    padding: 0;
+    margin-bottom: 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    overflow: hidden; /* Hide default color picker border */
+}
+
+#action-buttons button {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    margin-bottom: 10px;
+    background-color: #9C27B0;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+#action-buttons button:hover {
+    background-color: #7B1FA2;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #app-container {
+        flex-direction: column;
+        width: 98%;
+        padding: 10px;
+    }
+    #canvas-area, #controls-panel {
+        min-width: unset; /* Remove min-width to allow full flexibility */
+        width: 100%;
+>>>>>>> d7cebbf1746b44fd748cb480ec586c397776ffae
+    }
+}
